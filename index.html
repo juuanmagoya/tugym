@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerFit Gym - Transforma tu Cuerpo, Transforma tu Vida</title>
+    <meta name="description" content="PowerFit Gym ofrece instalaciones de primer nivel, entrenadores profesionales y un ambiente motivador para ayudarte a alcanzar tus metas fitness.">
+    <meta name="keywords" content="gimnasio, fitness, entrenamiento, musculación, cardio, salud, ejercicio, PowerFit">
+    <!-- Open Graph -->
+    <meta property="og:title" content="PowerFit Gym - Transforma tu Cuerpo, Transforma tu Vida">
+    <meta property="og:description" content="El mejor gimnasio con instalaciones de primer nivel y entrenadores profesionales.">
+    <meta property="og:type" content="website">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PowerFit Gym - Transforma tu Cuerpo, Transforma tu Vida">
+    <meta name="twitter:description" content="El mejor gimnasio con instalaciones de primer nivel y entrenadores profesionales.">
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💪</text></svg>">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e53e3e;
+            --primary-dark: #c53030;
+            --secondary: #2d3748;
+            --accent: #f6ad55;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #2d3748;
+            background-color: #f7fafc;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .page-transition {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .page-loaded .page-transition {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23333"/><path d="M0 0L100 100" stroke="%23555" stroke-width="2"/><path d="M100 0L0 100" stroke="%23555" stroke-width="2"/></svg>');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .schedule-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .schedule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .carousel-item {
+            transition: opacity 0.8s ease;
+        }
+        
+        .carousel-item-hidden {
+            opacity: 0;
+            display: none;
+        }
+        
+        .carousel-item-visible {
+            opacity: 1;
+            display: block;
+        }
+        
+        .social-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .social-hover:hover {
+            transform: scale(1.15);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--primary-dark), #ed8936);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(229, 62, 62, 0.3);
+        }
+        
+        .feature-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .testimonial-card {
+            transition: all 0.4s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .membership-card {
+            transition: all 0.4s ease;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .membership-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .popular-membership {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .popular-membership::before {
+            content: "POPULAR";
+            position: absolute;
+            top: 20px;
+            right: -34px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 40px;
+            font-size: 14px;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="fixed w-full z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center">
+                            <i class="fas fa-dumbbell text-white"></i>
+                        </div>
+                        <span class="font-bold text-xl text-gray-800">PowerFit Gym</span>
+                    </a>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="font-medium hover:text-red-600 transition-colors">Inicio</a>
+                    <a href="#horarios" class="font-medium hover:text-red-600 transition-colors">Horarios</a>
+                    <a href="#servicios" class="font-medium hover:text-red-600 transition-colors">Servicios</a>
+                    <a href="#galeria" class="font-medium hover:text-red-600 transition-colors">Galería</a>
+                    <a href="#membresias" class="font-medium hover:text-red-600 transition-colors">Membresías</a>
+                    <a href="#contacto" class="font-medium hover:text-red-600 transition-colors">Contacto</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20unirme%20al%20gimnasio" target="_blank" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors hidden md:inline-block">¡Únete Ahora!</a>
+                    <button id="mobileMenuButton" class="md:hidden text-gray-800">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#inicio" class="font-medium py-2 hover:text-red-600 transition-colors">Inicio</a>
+                <a href="#horarios" class="font-medium py-2 hover:text-red-600 transition-colors">Horarios</a>
+                <a href="#servicios" class="font-medium py-2 hover:text-red-600 transition-colors">Servicios</a>
+                <a href="#galeria" class="font-medium py-2 hover:text-red-600 transition-colors">Galería</a>
+                <a href="#membresias" class="font-medium py-2 hover:text-red-600 transition-colors">Membresías</a>
+                <a href="#contacto" class="font-medium py-2 hover:text-red-600 transition-colors">Contacto</a>
+                <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20unirme%20al%20gimnasio" target="_blank" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-center my-2">¡Únete Ahora!</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section pt-24">
+        <div class="container mx-auto px-4 text-center text-white page-transition">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Transforma tu cuerpo, <span class="text-red-400">transforma tu vida</span></h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">En PowerFit Gym te ayudamos a alcanzar tus metas fitness con instalaciones de primer nivel y entrenadores profesionales.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-16">
+                <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20unirme%20al%20gimnasio" target="_blank" class="btn-primary px-8 py-4 rounded-lg font-bold text-lg">¡Inscríbete Hoy!</a>
+                <a href="#servicios" class="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-bold text-lg transition-colors">Nuestros Servicios</a>
+            </div>
+            
+            <div class="floating">
+                <i class="fas fa-chevron-down text-4xl opacity-75"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horarios Section -->
+    <section id="horarios" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 page-transition">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nuestros Horarios</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Estamos abiertos todos los días para ayudarte a alcanzar tus metas fitness.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="schedule-card bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-4 text-red-600">Lunes - Viernes</h3>
+                    <p class="text-lg mb-2"><span class="font-semibold">Mañana:</span> 6:00 AM - 12:00 PM</p>
+                    <p class="text-lg mb-2"><span class="font-semibold">Tarde:</span> 4:00 PM - 10:00 PM</p>
+                    <div class="mt-4 bg-red-50 p-3 rounded-lg">
+                        <p class="text-red-700"><i class="fas fa-users mr-2"></i> Horario pico: 6:00 PM - 8:00 PM</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-card bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-4 text-red-600">Sábados</h3>
+                    <p class="text-lg mb-2"><span class="font-semibold">Mañana:</span> 7:00 AM - 2:00 PM</p>
+                    <p class="text-lg mb-2"><span class="font-semibold">Tarde:</span> 4:00 PM - 8:00 PM</p>
+                    <div class="mt-4 bg-green-50 p-3 rounded-lg">
+                        <p class="text-green-700"><i class="fas fa-baby mr-2"></i> Clases especiales: Yoga y Pilates</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-card bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-4 text-red-600">Domingos</h3>
+                    <p class="text-lg mb-2"><span class="font-semibold">Horario especial:</span> 8:00 AM - 4:00 PM</p>
+                    <p class="text-lg opacity-0">Espacio reservado</p>
+                    <div class="mt-4 bg-blue-50 p-3 rounded-lg">
+                        <p class="text-blue-700"><i class="fas fa-dumbbell mr-2"></i> Área de cardio disponible todo el día</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Section -->
+    <section id="servicios" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 page-transition">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nuestros Servicios</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Ofrecemos una amplia variedad de servicios para satisfacer todas tus necesidades fitness.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-8 text-center page-transition">
+                    <div class="feature-icon bg-red-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-dumbbell text-red-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Área de Musculación</h3>
+                    <p class="text-gray-600">Equipos de última generación para entrenamiento de fuerza y resistencia.</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8 text-center page-transition">
+                    <div class="feature-icon bg-red-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-running text-red-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Cardio</h3>
+                    <p class="text-gray-600">Máquinas cardiovasculares modernas para mejorar tu resistencia y salud.</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8 text-center page-transition">
+                    <div class="feature-icon bg-red-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-users text-red-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Clases Grupales</h3>
+                    <p class="text-gray-600">Yoga, spinning, crossfit y más, dirigidas por instructores certificados.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 page-transition">
+                <a href="https://wa.me/1234567890?text=Hola,%20me%20gustaría%20saber%20más%20sobre%20los%20servicios%20del%20gimnasio" target="_blank" class="btn-primary px-8 py-4 rounded-lg font-bold text-lg inline-flex items-center">
+                    <i class="fab fa-whatsapp mr-3"></i> Consultar por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrusel Section -->
+    <section id="galeria" class="py-20 bg-gray-800 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 page-transition">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nuestras Instalaciones</h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">Conoce nuestro espacio de entrenamiento de primer nivel.</p>
+            </div>
+            
+            <div class="relative max-w-4xl mx-auto page-transition">
+                <div class="carousel-item carousel-item-visible">
+                    <div class="bg-gray-700 rounded-xl overflow-hidden shadow-xl">
+                        <div class="h-64 md:h-96 bg-gray-600 flex items-center justify-center">
+                            <i class="fas fa-dumbbell text-6xl text-gray-400"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Área de Pesas</h3>
+                            <p class="text-gray-300">Nuestro espacio de musculación con equipos de última generación.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-item carousel-item-hidden">
+                    <div class="bg-gray-700 rounded-xl overflow-hidden shadow-xl">
+                        <div class="h-64 md:h-96 bg-gray-600 flex items-center justify-center">
+                            <i class="fas fa-running text-6xl text-gray-400"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Zona de Cardio</h3>
+                            <p class="text-gray-300">Máquinas cardiovasculares modernas para tu entrenamiento.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-item carousel-item-hidden">
+                    <div class="bg-gray-700 rounded-xl overflow-hidden shadow-xl">
+                        <div class="h-64 md:h-96 bg-gray-600 flex items-center justify-center">
+                            <i class="fas fa-users text-6xl text-gray-400"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Estudio de Clases</h3>
+                            <p class="text-gray-300">Amplio espacio para nuestras clases grupales dirigidas.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="carousel-prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <button id="carousel-next" class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <div class="flex justify-center mt-6 space-x-2">
+                    <button class="carousel-indicator w-3 h-3 rounded-full bg-gray-500"></button>
+                    <button class="carousel-indicator w-3 h-3 rounded-full bg-gray-500"></button>
+                    <button class="carousel-indicator w-3 h-3 rounded-full bg-gray-500"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membresías Section -->
+    <section id="membresias" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 page-transition">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nuestras Membresías</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Elige el plan que mejor se adapte a tus necesidades y objetivos.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="membership-card bg-white rounded-xl p-8 shadow-md">
+                    <h3 class="text-2xl font-bold mb-4 text-center">Básico</h3>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-red-600">$1,499</span>
+                        <span class="text-gray-600">/mes</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Acceso a área de musculación</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Acceso a área de cardio</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-times text-gray-400 mr-3"></i>
+                            <span class="text-gray-400">Clases grupales</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-times text-gray-400 mr-3"></i>
+                            <span class="text-gray-400">Entrenador personal</span>
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20el%20plan%20Básico" target="_blank" class="block w-full bg-gray-200 hover:bg-gray-300 text-gray-800 text-center py-3 rounded-lg font-medium transition-colors">Seleccionar</a>
+                </div>
+                
+                <div class="membership-card popular-membership bg-white rounded-xl p-8 shadow-md border-red-500">
+                    <h3 class="text-2xl font-bold mb-4 text-center">Premium</h3>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-red-600">$2,499</span>
+                        <span class="text-gray-600">/mes</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Acceso a área de musculación</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Acceso a área de cardio</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Clases grupales ilimitadas</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>1 sesión con entrenador personal</span>
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20el%20plan%20Premium" target="_blank" class="block w-full btn-primary text-center py-3 rounded-lg font-medium">Seleccionar</a>
+                </div>
+                
+                <div class="membership-card bg-white rounded-xl p-8 shadow-md">
+                    <h3 class="text-2xl font-bold mb-4 text-center">VIP</h3>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-red-600">$3,999</span>
+                        <span class="text-gray-600">/mes</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Acceso completo 24/7</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Clases grupales ilimitadas</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>4 sesiones con entrenador personal</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            <span>Acceso a área VIP y locker</span>
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20el%20plan%20VIP" target="_blank" class="block w-full bg-gray-200 hover:bg-gray-300 text-gray-800 text-center py-3 rounded-lg font-medium transition-colors">Seleccionar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 page-transition">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Contáctanos</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Estamos aquí para responder todas tus preguntas y ayudarte a comenzar tu journey fitness.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div class="page-transition">
+                    <h3 class="text-2xl font-bold mb-6">Información de Contacto</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-red-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-map-marker-alt text-red-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Dirección</h4>
+                                <p class="text-gray-600">Av. Fitness 123, Ciudad</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-red-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-phone text-red-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Teléfono</h4>
+                                <p class="text-gray-600">+1 234 567 890</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-red-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-red-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Email</h4>
+                                <p class="text-gray-600">info@powerfitgym.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10">
+                        <h4 class="font-bold mb-4">Síguenos en redes sociales</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="social-hover text-gray-600 hover:text-red-600 text-2xl"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-hover text-gray-600 hover:text-red-600 text-2xl"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-hover text-gray-600 hover:text-red-600 text-2xl"><i class="fab fa-tiktok"></i></a>
+                            <a href="#" class="social-hover text-gray-600 hover:text-red-600 text-2xl"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="page-transition">
+                    <h3 class="text-2xl font-bold mb-6">Envíanos un mensaje</h3>
+                    <p class="text-gray-600 mb-6">Contáctanos directamente por WhatsApp para información sobre membresías, horarios y servicios.</p>
+                    
+                    <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20obtener%20más%20información%20sobre%20el%20gimnasio" target="_blank" class="btn-primary px-8 py-4 rounded-lg font-bold text-lg inline-flex items-center justify-center w-full">
+                        <i class="fab fa-whatsapp mr-3 text-2xl"></i> Contactar por WhatsApp
+                    </a>
+                    
+                    <div class="mt-8 bg-gray-50 p-6 rounded-lg">
+                        <h4 class="font-bold mb-3">Horario de Atención</h4>
+                        <p class="text-gray-600">Lunes a Viernes: 8:00 AM - 10:00 PM</p>
+                        <p class="text-gray-600">Sábados y Domingos: 9:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center mr-3">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        PowerFit Gym
+                    </h3>
+                    <p class="text-gray-400">Transformando cuerpos y vidas desde 2010.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#inicio" class="text-gray-400 hover:text-white transition-colors">Inicio</a></li>
+                        <li><a href="#horarios" class="text-gray-400 hover:text-white transition-colors">Horarios</a></li>
+                        <li><a href="#servicios" class="text-gray-400 hover:text-white transition-colors">Servicios</a></li>
+                        <li><a href="#membresias" class="text-gray-400 hover:text-white transition-colors">Membresías</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contáctanos</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Av. Fitness 123, Ciudad</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+1 234 567 890</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@powerfitgym.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Síguenos</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-hover text-gray-400 hover:text-white text-xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-hover text-gray-400 hover:text-white text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-hover text-gray-400 hover:text-white text-xl"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="social-hover text-gray-400 hover:text-white text-xl"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-10 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 PowerFit Gym. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20unirme%20al%20gimnasio" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg z-50">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <script>
+        // Page Load Transition
+        window.addEventListener('load', function() {
+            document.body.classList.add('page-loaded');
+            setTimeout(function() {
+                document.getElementById('loadingScreen').classList.add('loading-hidden');
+            }, 10);
+        });
+
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Carousel Functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+        
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.replace('carousel-item-visible', 'carousel-item-hidden'));
+            indicators.forEach(indicator => indicator.classList.replace('bg-red-600', 'bg-gray-500'));
+            
+            slides[index].classList.replace('carousel-item-hidden', 'carousel-item-visible');
+            indicators[index].classList.replace('bg-gray-500', 'bg-red-600');
+            
+            currentSlide = index;
+        }
+        
+        document.getElementById('carousel-next').addEventListener('click', function() {
+            let nextSlide = currentSlide + 1;
+            if (nextSlide >= slides.length) nextSlide = 0;
+            showSlide(nextSlide);
+        });
+        
+        document.getElementById('carousel-prev').addEventListener('click', function() {
+            let prevSlide = currentSlide - 1;
+            if (prevSlide < 0) prevSlide = slides.length - 1;
+            showSlide(prevSlide);
+        });
+        
+        // Add click events to indicators
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', function() {
+                showSlide(index);
+            });
+        });
+        
+        // Auto advance carousel
+        setInterval(function() {
+            let nextSlide = currentSlide + 1;
+            if (nextSlide >= slides.length) nextSlide = 0;
+            showSlide(nextSlide);
+        }, 5000);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 50,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
